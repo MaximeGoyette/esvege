@@ -7,10 +7,8 @@
   position: absolute;
 }
 
-.section.state textarea {
+.section.state {
   background-color: rgb(39, 40, 34);
-  font-family: 'Fira Code';
-  color: white;
 }
 
 .section.canvas {

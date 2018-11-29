@@ -3,7 +3,7 @@ import Section from './Section'
 import Canvas from './Canvas'
 import _ from 'lodash'
 import ReactCursorPosition from 'react-cursor-position'
-import classNames from 'classnames'
+import JsonView from 'react-json-view'
 
 export const EditorContext = createContext()
 
@@ -38,11 +38,6 @@ class Editor extends Component {
             size: 50,
             snap: true,
             show: true
-        },
-        tempState: {
-            upToDate: false,
-            valid: false,
-            content: ''
         }
     }
 
@@ -103,60 +98,6 @@ class Editor extends Component {
         }
     }
 
-    componentDidMount() {
-        this.setState({
-            tempState: {
-                upToDate: false,
-                valid: false,
-                content: JSON.stringify(_.pickBy(this.state, (v, k) => k !== 'tempState'), null, 4)
-            }
-        })
-    }
-
-    componentDidUpdate() {
-        const { tempState: { upToDate } } = this.state
-
-        if (!upToDate) {
-            this.setState({
-                tempState: {
-                    upToDate: true,
-                    valid: true,
-                    content: JSON.stringify(_.pickBy(this.state, (v, k) => k !== 'tempState'), null, 4)
-                }
-            })
-        }
-    }
-
-    validateState = (content) => {
-        try {
-            const newState = JSON.parse(content)
-            this.setState({
-                ...newState,
-                tempState: {
-                    upToDate: false,
-                    valid: true
-                }
-            })
-        } catch (err) {
-            this.setState({
-                tempState: {
-                    ...this.state.tempState,
-                    valid: false
-                }
-            })
-        }
-    }
-
-    onStateChange = (e) => {
-        this.setState({
-            tempState: {
-                ...this.state.tempState,
-                content: e.target.value
-            }
-        })
-        this.validateState(e.target.value)
-    }
-
 	render() {
         const { state } = this
 
@@ -168,7 +109,7 @@ class Editor extends Component {
                     </ReactCursorPosition>
                 </Section>
                 <Section className="state" dim={[70, 0, 30, 100]}>
-                    <textarea className={classNames('fill', { 'invalid': !state.tempState.valid })} onChange={this.onStateChange} spellCheck="false" value={state.tempState.content} />
+                    <JsonView className="fill" src={state} theme="monokai" enableClipboard={false} displayObjectSize={false} displayDataTypes={false} onEdit={({ updated_src }) => this.setState(updated_src)} />
                 </Section>
             </EditorContext.Provider>
 		)
