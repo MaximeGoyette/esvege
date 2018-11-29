@@ -1,0 +1,1 @@
+export const applySnap = (c, snap) => Math.round(c/snap)*snap
