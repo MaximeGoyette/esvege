@@ -7,7 +7,6 @@
     "classnames": "^2.2.6",
     "firacode": "^1.205.0",
     "jquery": "^3.3.1",
-    "json-colorizer": "^2.1.0",
     "lodash": "^4.17.11",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",

@@ -20,7 +20,8 @@ class Editor extends Component {
                 type: 'circle',
                 x: 300,
                 y: 600,
-                r: 50
+                r: 50,
+                fill: 'red'
             }
         ],
 
@@ -58,9 +59,7 @@ class Editor extends Component {
         onMouseDown: () => {
             this.setState({
                 mouse: {
-
                     ...this.state.mouse,
-
                     pressed: true
                 }
             })
@@ -81,10 +80,10 @@ class Editor extends Component {
                 const offY = y - mouse.position.y
 
                 return {
-                    ...otherAttr,
                     type,
                     x: selectedShapes.includes(index) ? position.x + offX : x,
-                    y: selectedShapes.includes(index) ? position.y + offY : y
+                    y: selectedShapes.includes(index) ? position.y + offY : y,
+                    ...otherAttr,
                 }
             })
 
