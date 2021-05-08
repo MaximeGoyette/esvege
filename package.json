@@ -7,7 +7,7 @@
     "classnames": "^2.2.6",
     "firacode": "^1.205.0",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
